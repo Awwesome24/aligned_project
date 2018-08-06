@@ -84,6 +84,11 @@ class Cancer(webapp2.RedirectHandler): #12
         
 
 
+
+
+
+
+# ** END OF ZODIAC PAGES **
 class lsf_page(webapp2.RedirectHandler):
     def get(self):
         lsf_template= the_jinja_env.get_template('')
