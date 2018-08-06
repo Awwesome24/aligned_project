@@ -42,10 +42,10 @@ class Taures(webapp2.RedirectHandler): #4
         taures_template= the_jinja_env.get_template('')
         self.response.write(taures_template.render())
 
-class Scorpio(webapp2.RedirectHandler):#5
+class Leo(webapp2.RedirectHandler):#5
     def get(self):
-        scorpio_template= the_jinja_env.get_template('')
-        self.response.write(scorpio_template.render())
+        leo_template= the_jinja_env.get_template('')
+        self.response.write(leo_template.render())
         
 class Capricorn(webapp2.RedirectHandler): #6
     def get(self):
