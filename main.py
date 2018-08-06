@@ -62,10 +62,10 @@ class Libra(webapp2.RedirectHandler): #8
         libra_template= the_jinja_env.get_template('')
         self.response.write(libra_template.render())
 
-class Scorpio(webapp2.RedirectHandler): #9
+class Leo(webapp2.RedirectHandler): #9
     def get(self):
-        scorpio_template= the_jinja_env.get_template('')
-        self.response.write(scorpio_template.render())
+        leo_template= the_jinja_env.get_template('')
+        self.response.write(leo_template.render())
         
 class Virgo(webapp2.RedirectHandler): #10
     def get(self):
