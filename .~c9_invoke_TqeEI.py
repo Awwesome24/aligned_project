@@ -1,8 +1,9 @@
 import webapp2
+from random import shuffle
 import jinja2
 import os
-import json
 from google.appengine.api import urlfetch
+import json
 
 
 the_jinja_env = jinja2.Environment(
