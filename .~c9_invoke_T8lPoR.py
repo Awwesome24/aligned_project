@@ -19,11 +19,23 @@ class Mainpage(webapp2.RedirectHandler):
         main_template= the_jinja_env.get_template('templates/main_page.html')
         self.response.write(main_template.render())
         
-class Zodiac_info(webapp2.RedirectHandler):
+#horoscope api for all zodiacs      
+
+# ** ZODIAC HANDLERS **
+class Aquarius(webapp2.RedirectHandler):
     def get(self):
-        info_template= the_jinja_env.get_template('')
-        self.response.write(info_template.render())
-#horoscope api        
+        aqua_template= the_jinja_env.get_template('')
+        self.response.write(aqua_template.render())
+
+class Pisces(webapp2.RedirectHandler):
+    def get(self):
+        pisces_template= the_jinja_env.get_template('')
+        self.response.write(pisces_template.render())
+
+
+
+
+
 class lsf_page(webapp2.RedirectHandler):
     def get(self):
         lsf_template= the_jinja_env.get_template('')
