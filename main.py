@@ -31,43 +31,43 @@ class Mainpage(webapp2.RedirectHandler):
 # Jamiel's
 class Aquarius(webapp2.RedirectHandler): #1
     def get(self):
-        aqua_template= the_jinja_env.get_template('')
+        aqua_template= the_jinja_env.get_template('templates/aquarius.html')
         self.response.write(aqua_template.render())
 
 class Pisces(webapp2.RedirectHandler): #2
     def get(self):
-        pisces_template= the_jinja_env.get_template('')
+        pisces_template= the_jinja_env.get_template('templates/pisces.html')
         self.response.write(pisces_template.render())
 
 class Aries(webapp2.RedirectHandler): #3
     def get(self):
-        aries_template= the_jinja_env.get_template('')
+        aries_template= the_jinja_env.get_template('templates/aries.html')
         self.response.write(aries_template.render())
 
 class Taures(webapp2.RedirectHandler): #4
     def get(self):
-        taures_template= the_jinja_env.get_template('')
+        taures_template= the_jinja_env.get_template('templates/tuares.html')
         self.response.write(taures_template.render())
 
 #Joel's
 class Leo(webapp2.RedirectHandler):#5
     def get(self):
-        leo_template= the_jinja_env.get_template('')
+        leo_template= the_jinja_env.get_template('templates/leo.html')
         self.response.write(leo_template.render())
         
 class Capricorn(webapp2.RedirectHandler): #6
     def get(self):
-        capricorn_template= the_jinja_env.get_template('')
+        capricorn_template= the_jinja_env.get_template('templates/capricorn.html')
         self.response.write(capricorn_template.render())
 
 class Gemini(webapp2.RedirectHandler): #7
     def get(self):
-        gemini_template= the_jinja_env.get_template('')
+        gemini_template= the_jinja_env.get_template('templates/gemini.html')
         self.response.write(gemini_template.render())
         
 class Libra(webapp2.RedirectHandler): #8
     def get(self):
-        libra_template= the_jinja_env.get_template('')
+        libra_template= the_jinja_env.get_template('templates/libra.html')
         self.response.write(libra_template.render())
 
 
@@ -75,22 +75,22 @@ class Libra(webapp2.RedirectHandler): #8
 #Eric's
 class Scorpio(webapp2.RedirectHandler): #9
     def get(self):
-        leo_template= the_jinja_env.get_template('')
+        leo_template= the_jinja_env.get_template('templates/scorpio.html')
         self.response.write(scorpio_template.render())
         
 class Virgo(webapp2.RedirectHandler): #10
     def get(self):
-        virgo_template= the_jinja_env.get_template('')
+        virgo_template= the_jinja_env.get_template('templates/virgo.html')
         self.response.write(virgo_template.render())
         
 class Sagittarius(webapp2.RedirectHandler):#11
     def get(self):
-        sagittarius_template= the_jinja_env.get_template('')
+        sagittarius_template= the_jinja_env.get_template('templates/sagittarius.html')
         self.response.write(sagittarius_template.render())
         
 class Cancer(webapp2.RedirectHandler): #12
     def get(self):
-        cancer_template= the_jinja_env.get_template('')
+        cancer_template= the_jinja_env.get_template('templates/cancer.html')
         self.response.write(cancer_template.render())
         
 
@@ -114,7 +114,7 @@ class api_page(webapp2.RedirectHandler):
 
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
-    ('/aquarius',Aquarius ),
+    ('/aquarius',Aquarius),
     ('/aries',Aries),
     ('/cancer',Cancer),
     ('/capricorn',Capricorn),
