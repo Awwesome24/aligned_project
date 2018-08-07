@@ -17,6 +17,13 @@ class Mainpage(webapp2.RedirectHandler):
     def get(self):
         main_template= the_jinja_env.get_template('templates/main_page.html')
         self.response.write(main_template.render())
+    
+    def post(self):
+        name = self.response.get('user_name')
+        sign = self.response.get('zodiac')
+        if sign == 'aquarius' (True):
+            self.response.write('')
+            
         
 #horoscope api for all zodiacs      
 
@@ -66,10 +73,10 @@ class Libra(webapp2.RedirectHandler): #8
 
 
 #Eric's
-class Leo(webapp2.RedirectHandler): #9
+class Scorpio(webapp2.RedirectHandler): #9
     def get(self):
         leo_template= the_jinja_env.get_template('')
-        self.response.write(leo_template.render())
+        self.response.write(scorpio_template.render())
         
 class Virgo(webapp2.RedirectHandler): #10
     def get(self):
@@ -106,7 +113,19 @@ class api_page(webapp2.RedirectHandler):
 
 
 app = webapp2.WSGIApplication([
-    ('/', Mainpage)
+    ('/', Mainpage),
+    ('/aquarius',Aquarius ),
+    ('/aries',Aries),
+    ('/cancer',Cancer),
+    ('/capricorn',Capricorn),
+    ('gemini',Gemini),
+    ('/leo',Leo),
+    ('/libra',Libra),
+    ('/pisces',Pisces),
+    ('sagittarius',Sagittarius),
+    ('/scorpio',Scorpio),
+    ('/taures',Taures),
+    ('/virgo', Virgo)
 ], debug=True)
 
-
+# NAME FIRST STORE IT AS A VARIABLE AND THEN DO HREF's FOR HTML
