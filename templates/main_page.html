@@ -3,28 +3,33 @@
     
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!--<link rel="stylesheet" type="text/css" href="templates/style.css">-->
         <title>Welcome to Aligned!</title>
     </head>
+    <style>
+        #main_page{
+            background-image: url("img/zodiac_pic.png")
+        }
+    </style>
     
-    <body>
+    <body id= "main_page">
         
         <h1> Aligned </h1>
         <form method=POST action ="/">
             <input type="text" name="user_name" value="What is your name?">
             <select name="zodiac">
-                <option value="aquarius">Aquarius</option>
-                <option value="aries">Aries</option>
-                <option value="cancer">Cancer</option>
-                <option value="capricorn">Capricorn</option>
-                <option value="gemini">Gemini</option>
-                <option value="leo">Leo</option>
-                <option value="libra">Libra</option>
-                <option value="pisces">Pisces</option>
-                <option value="sagittarius">Sagittarius</option>
-                <option value="scorpio">Scorpio</option>
-                <option value="taures">Taures</option>
-                <option value="Virgo">Virgo</option>
+                <option value="aquarius" name= "aquarius">Aquarius</option>
+                <option value="aries" name= "aries">Aries</option>
+                <option value="cancer" name= "cancer">Cancer</option>
+                <option value="capricorn" name= "capricorn">Capricorn</option>
+                <option value="gemini" name= "gemini">Gemini</option>
+                <option value="leo" name= "leo">Leo</option>
+                <option value="libra" name= "libra">Libra</option>
+                <option value="pisces" name= "pisces">Pisces</option>
+                <option value="sagittarius" name= "sagittarius">Sagittarius</option>
+                <option value="scorpio" name= "scorpio">Scorpio</option>
+                <option value="taures" name= "taures">Taures</option>
+                <option value="virgo" name= "virgo">Virgo</option>
             </select>
         </form>
     </body>
