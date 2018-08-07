@@ -19,12 +19,27 @@ class Mainpage(webapp2.RedirectHandler):
         self.response.write(main_template.render())
     
     def post(self):
-        name = self.response.get('user_name')
-        sign = self.response.get('zodiac')
-        if sign == 'aquarius' (True):
-            self.response.write('')
-            
+        main_template= the_jinja_env.get_template('templates/main_page.html')
+        name = self.request.get('user_name')
+        user_info={
+            'name':name
+        }
+        self.response.write(main_template.render(user_info))
         
+
+class Mainpage2(webapp2.RedirectHandler):
+    def get(self):
+        main_template= the_jinja_env.get_template('templates/main_page2.html')
+        self.response.write(main_template.render())
+    def post(self):
+        main_template= the_jinja_env.get_template('templates/main_page2.html')
+        name = self.request.get('user_name')
+        user_info={
+            'name':name
+        }
+        self.response.write(main_template.render(user_info))    
+
+
 #horoscope api for all zodiacs      
 
 # ** ZODIAC HANDLERS **
@@ -33,6 +48,7 @@ class Aquarius(webapp2.RedirectHandler): #1
     def get(self):
         aqua_template= the_jinja_env.get_template('templates/aquarius.html')
         self.response.write(aqua_template.render())
+
 
 class Pisces(webapp2.RedirectHandler): #2
     def get(self):
@@ -46,7 +62,7 @@ class Aries(webapp2.RedirectHandler): #3
 
 class Taures(webapp2.RedirectHandler): #4
     def get(self):
-        taures_template= the_jinja_env.get_template('templates/tuares.html')
+        taures_template= the_jinja_env.get_template('templates/taures.html')
         self.response.write(taures_template.render())
 
 #Joel's
@@ -75,7 +91,7 @@ class Libra(webapp2.RedirectHandler): #8
 #Eric's
 class Scorpio(webapp2.RedirectHandler): #9
     def get(self):
-        leo_template= the_jinja_env.get_template('templates/scorpio.html')
+        scorpio_template= the_jinja_env.get_template('templates/scorpio.html')
         self.response.write(scorpio_template.render())
         
 class Virgo(webapp2.RedirectHandler): #10
@@ -114,15 +130,16 @@ class api_page(webapp2.RedirectHandler):
 
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
+    ('/main2',Mainpage2),
     ('/aquarius',Aquarius),
     ('/aries',Aries),
     ('/cancer',Cancer),
     ('/capricorn',Capricorn),
-    ('gemini',Gemini),
+    ('/gemini',Gemini),
     ('/leo',Leo),
     ('/libra',Libra),
     ('/pisces',Pisces),
-    ('sagittarius',Sagittarius),
+    ('/sagittarius',Sagittarius),
     ('/scorpio',Scorpio),
     ('/taures',Taures),
     ('/virgo', Virgo)
