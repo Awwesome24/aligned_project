@@ -118,11 +118,11 @@ app = webapp2.WSGIApplication([
     ('/aries',Aries),
     ('/cancer',Cancer),
     ('/capricorn',Capricorn),
-    ('gemini',Gemini),
+    ('/gemini',Gemini),
     ('/leo',Leo),
     ('/libra',Libra),
     ('/pisces',Pisces),
-    ('sagittarius',Sagittarius),
+    ('/sagittarius',Sagittarius),
     ('/scorpio',Scorpio),
     ('/taures',Taures),
     ('/virgo', Virgo)
