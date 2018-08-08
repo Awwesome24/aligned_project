@@ -3,7 +3,14 @@ import jinja2
 import os
 import json
 from google.appengine.api import urlfetch
+#from requests_toolbelt.adapters import appengine
+#appengine.monkeypatch()
+import sdk
 
+userID = "602635";
+apiKey = "1d6bc9e59f87b63b70bc675c4269e173";
+
+clientInstance = sdk.VRClient(userID, apiKey)
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -14,8 +21,13 @@ the_jinja_env = jinja2.Environment(
 user_info={
     'name':"",
     'sign':"",
-    'url':""
+    'url':"",
+    'gender':"",
+    'month':"",
+    'day':"",
+    'year':""
     }
+    
 
 zodiac_backgrounds={
     'Aquarius':'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BKpZoQ4viqlda90c/videoblocks-zodiac-sign-aquarius-and-horoscope-wheel-on-the-dark-blue-background_by6wer0hg_thumbnail-full01.png',
@@ -31,6 +43,7 @@ zodiac_backgrounds={
     'Sagittarius':'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BKpZoQ4viqlda90c/videoblocks-zodiac-sign-sagittarius-and-horoscope-wheel-on-the-dark-blue-background_htvwq0rbm_thumbnail-full01.png',
     'Cancer':'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BKpZoQ4viqlda90c/videoblocks-zodiac-sign-cancer-and-horoscope-wheel-on-the-dark-blue-background_s3wxt2uphf_thumbnail-full01.png'
 }
+
 
     
 class Mainpage(webapp2.RedirectHandler):
@@ -61,6 +74,29 @@ class results(webapp2.RedirectHandler):
         result_template= the_jinja_env.get_template('templates/results.html')
         self.response.write(result_template.render(user_info))
 
+
+class test(webapp2.RedirectHandler):
+    def get(self):
+        data = {
+            'date': 10,
+            'month': 12,
+            'year': 1993,
+            'hour': 1,
+            'minute': 25,
+            'latitude': 25,
+            'longitude': 82,
+            'timezone': 5.5
+        }
+        resource = "astro_details"
+    
+        # instantiate VedicRishiClient class
+        ritesh = sdk.VRClient(userID,apiKey)
+    
+        # call horoscope apis
+        responseData = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
+        print(responseData)
+
+
 #horoscope api for all zodiacs      
 
 class lsf_page(webapp2.RedirectHandler):
@@ -78,6 +114,7 @@ class api_page(webapp2.RedirectHandler):
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
     ('/main2',Mainpage2),
-    ('/results',)
+    ('/results',results),
+    ('/test',test)
 ], debug=True)
 
