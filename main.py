@@ -56,7 +56,7 @@ class Mainpage2(webapp2.RedirectHandler):
         user_info['url']= zodiac_backgrounds[sign]
         self.response.write(main_template.render(user_info))    
 
-class results(webapp2.RedirectHandler):
+class Results(webapp2.RedirectHandler):
     def get(self):
         result_template= the_jinja_env.get_template('templates/results.html')
         self.response.write(result_template.render(user_info))
@@ -72,12 +72,13 @@ class api_page(webapp2.RedirectHandler):
     def get(self):
         api_template= the_jinja_env.get_template('')
         self.response.write(api_template.render())
+        
 # requires an API
 
 
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
     ('/main2',Mainpage2),
-    ('/results',)
+    ('/results',Results)
 ], debug=True)
 
