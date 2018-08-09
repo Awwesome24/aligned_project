@@ -52,11 +52,11 @@ class Mainpage(webapp2.RedirectHandler):
         self.response.write(main_template.render())
     
     def post(self):
-        main_template= the_jinja_env.get_template('templates/main_page2.html')
+        main_template2= the_jinja_env.get_template('templates/main_page2.html')
         name = self.request.get('user_name')
         print(name)
         user_info['name']=name
-        self.response.write(main_template.render(user_info))
+        self.response.write(main_template2.render(user_info))
 
 class Mainpage2(webapp2.RedirectHandler):
     def get(self):
@@ -115,11 +115,6 @@ class api_page(webapp2.RedirectHandler):
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
     ('/main2',Mainpage2),
-<<<<<<< HEAD
     ('/results',Results)
-=======
-    ('/results',results),
-    ('/test',test)
->>>>>>> f3d8909ac9322baaf98c573063ecafd3ef71858a
 ], debug=True)
 
