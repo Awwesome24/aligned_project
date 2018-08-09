@@ -3,6 +3,8 @@ import jinja2
 import os
 import json
 from google.appengine.api import urlfetch
+#from requests_toolbelt.adapters import appengine
+#appengine.monkeypatch()
 import sdk
 import re
 
@@ -53,6 +55,8 @@ zodiac_backgrounds={
     'Cancer':'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BKpZoQ4viqlda90c/videoblocks-zodiac-sign-cancer-and-horoscope-wheel-on-the-dark-blue-background_s3wxt2uphf_thumbnail-full01.png'
 }
 
+
+    
 class Mainpage(webapp2.RedirectHandler):
     def get(self):
         main_template= the_jinja_env.get_template('templates/main_page.html')
@@ -60,10 +64,6 @@ class Mainpage(webapp2.RedirectHandler):
     def post(self):
         main_template2= the_jinja_env.get_template('templates/main_page2.html')
         name = self.request.get('user_name')
-        month = self.request.get('user_month')
-        day= self.request.get('user_day')
-        year= self.request.get('user_year')
-        gender=self.request.get('user_gender')
         user_info['name']=name
         self.response.write(main_template2.render(user_info))
 
