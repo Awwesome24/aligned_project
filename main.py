@@ -3,8 +3,6 @@ import jinja2
 import os
 import json
 from google.appengine.api import urlfetch
-#from requests_toolbelt.adapters import appengine
-#appengine.monkeypatch()
 import sdk
 import re
 
@@ -27,10 +25,6 @@ user_info={
     'name':"",
     'sign':"",
     'url':"",
-    'gender':"",
-    'month':"",
-    'day':"",
-    'year':""
     }
     
 data = {
@@ -59,8 +53,6 @@ zodiac_backgrounds={
     'Cancer':'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BKpZoQ4viqlda90c/videoblocks-zodiac-sign-cancer-and-horoscope-wheel-on-the-dark-blue-background_s3wxt2uphf_thumbnail-full01.png'
 }
 
-
-    
 class Mainpage(webapp2.RedirectHandler):
     def get(self):
         main_template= the_jinja_env.get_template('templates/main_page.html')
@@ -73,10 +65,6 @@ class Mainpage(webapp2.RedirectHandler):
         year= self.request.get('user_year')
         gender=self.request.get('user_gender')
         user_info['name']=name
-        user_info['month']=month
-        user_info['day']=day
-        user_info['year']=year
-        user_info['gender']=gender
         self.response.write(main_template2.render(user_info))
 
 class Mainpage2(webapp2.RedirectHandler):
@@ -93,14 +81,37 @@ class Results(webapp2.RedirectHandler):
         print "=========Results (post)========="
         result_template= the_jinja_env.get_template('templates/results.html')
         sign = self.request.get('sign')
-        
-        resource = "general_ascendant_report/tropical"
-        ritesh = sdk.VRClient(userID,apiKey)
-        
+        if sign == "Aquarius":
+            data['month']=4
+        elif sign =="Pisces":
+            data['month']=5
+        elif sign =="Aries":
+            data['month']=6
+        elif sign =="Taures":
+            data['month']=7
+        elif sign =="Gemini":
+            data['month']=8
+        elif sign =="Cancer":
+            data['month']=9
+        elif sign =="Leo":
+            data['month']=10
+        elif sign =="Virgo":
+            data['month']=11
+        elif sign =="Libra":
+            data['month']=12
+        elif sign =="Scorpio":
+            data['month']=1
+        elif sign =="Sagittarius":
+            data['month']=2
+        elif sign =="Capricorn":
+            data['month']=3
+        resource = "general_ascendant_report/tropical" # sets destination of info to extract
+        ritesh = sdk.VRClient(userID,apiKey)  # destroys paywall
         zodiac_info = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
+        # sets the information to a dictionary/variable
         ascendant = zodiac_info['ascendant']
         report= zodiac_info['report']
-
+        # stores the info from URL into a variable
         the_variable_dict = {
             'report_key': report.decode('utf-8'),
             'sign_key': sign,
@@ -110,29 +121,6 @@ class Results(webapp2.RedirectHandler):
         }
         output = result_template.render(the_variable_dict)
         self.response.write(output.encode('utf-8'))
-
-'''
-
-class test(webapp2.RedirectHandler):
-    def get(self):
-
-        resource = "general_ascendant_report/tropical"
-    
-        # instantiate VedicRishiClient class
-        ritesh = sdk.VRClient(userID,apiKey)
-        
-        #print("Ascendant: ")
-        zodiac_info = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
-        # print(user_info['ascendant'])
-        # print(user_info['report'])
-        self.response.write(zodiac_info['ascendant'])
-        self.response.write(zodiac_info['report'])
-        self.response.write(user_info['name'])
-        #self.response.write(responseData)
-
-#horoscope api for all zodiacs      
-# requires an API
-'''
 
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
