@@ -6,6 +6,7 @@ from google.appengine.api import urlfetch
 #from requests_toolbelt.adapters import appengine
 #appengine.monkeypatch()
 import sdk
+import re
 
 userID = "602635";
 apiKey = "1d6bc9e59f87b63b70bc675c4269e173";
@@ -18,8 +19,8 @@ the_jinja_env = jinja2.Environment(
     autoescape=True)
 
 zodiac_info={
-    'ascendant':"",
-    'report':""
+    '':"",
+    '':""
 }
 
 user_info={
@@ -65,7 +66,7 @@ class Mainpage(webapp2.RedirectHandler):
         main_template= the_jinja_env.get_template('templates/main_page.html')
         self.response.write(main_template.render())
     def post(self):
-        main_template= the_jinja_env.get_template('templates/main_page2.html')
+        main_template2= the_jinja_env.get_template('templates/main_page2.html')
         name = self.request.get('user_name')
         month = self.request.get('user_month')
         day= self.request.get('user_day')
@@ -76,31 +77,40 @@ class Mainpage(webapp2.RedirectHandler):
         user_info['day']=day
         user_info['year']=year
         user_info['gender']=gender
-        self.response.write(main_template.render(user_info))
+        self.response.write(main_template2.render(user_info))
 
 class Mainpage2(webapp2.RedirectHandler):
     def get(self):
         main_template= the_jinja_env.get_template('templates/main_page2.html')
         self.response.write(main_template.render(user_info))
     def post(self):
-        main_template= the_jinja_env.get_template('templates/results.html')
-        sign = self.request.get('sign')
-        user_info['sign']= sign
-        user_info['url']= zodiac_backgrounds[sign]
-        self.response.write(main_template.render(user_info))   
+        main_template= the_jinja_env.get_template('templates/main_page2.html')
 
-class results(webapp2.RedirectHandler):
-    def get(self):
+        self.response.write(main_template.render())   
+
+class Results(webapp2.RedirectHandler):
+    def post(self):
+        print "=========Results (post)========="
         result_template= the_jinja_env.get_template('templates/results.html')
+        sign = self.request.get('sign')
+        
         resource = "general_ascendant_report/tropical"
         ritesh = sdk.VRClient(userID,apiKey)
+        
         zodiac_info = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
-        self.response.write(zodiac_info['ascendant'])
-        self.response.write(zodiac_info['report'])
+        ascendant = zodiac_info['ascendant']
+        report= zodiac_info['report']
 
+        the_variable_dict = {
+            'report_key': report.decode('utf-8'),
+            'sign_key': sign,
+            'ascendant_key':ascendant,
+            'background_url_key': zodiac_backgrounds[sign],
+            'name_key': user_info['name']
+        }
+        output = result_template.render(the_variable_dict)
+        self.response.write(output.encode('utf-8'))
 
-
-        self.response.write(result_template.render(user_info))
 '''
 
 class test(webapp2.RedirectHandler):
@@ -121,13 +131,14 @@ class test(webapp2.RedirectHandler):
         #self.response.write(responseData)
 
 #horoscope api for all zodiacs      
-
+# requires an API
 '''
 
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
     ('/main2',Mainpage2),
-    ('/results',results)
+    ('/results',Results),
    # ('/test',test)
+
 ], debug=True)
 

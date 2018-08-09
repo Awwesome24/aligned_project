@@ -3,27 +3,27 @@
     
     <head>
         <meta charset="utf-8">
-        <title>{{sign}}</title>
+        <title>{{sign_key}}</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <style>
         body {
+            background-image:url({{background_url_key}});
             background-size:cover;
             color: white;
             text-align: center;
         }
         .text{
-            color:white;
+            color:black
             
         }
     </style>
-    <p class="text">{{responseData}}</p>
     <body>
-        <h1 class="text-align">{{sign}}</h1>
-        <h2 class="text-align">Do you know what your sign means, {{name}}?</h2>
-        
-        
+        <h1 class="text-align">{{sign_key}}</h1>
+        <h2 class="text-align">Do you know what your sign means, {{name_key}}?</h2>
+        <p class="text">{{ascendant_key}}</p>
+        <br>
+        <h1>{{report_key}}</h1>
     </body>
-    
     
 </html>

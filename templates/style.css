@@ -1,3 +1,32 @@
 .text-align {
     text-align: center;
 }
+
+#background {
+    background-image:url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jPLiQ-9/looped-4kuhd-nebula-galaxy-star-space-background-for-different-events-and-projects_rm2jcfxb__F0012.png);
+    background-size:cover;
+}
+
+.btn {
+    background-color:purple;
+    display:grid;
+    justify-content:center;
+    border: 1px solid white;
+    height:70px;
+    width:450px;
+    font-size:40px;
+    font-family: 'Kaushan Script', cursive;
+    
+}
+
+#btnPos {
+    margin:;
+}
+
+#btnPos2 {
+    margin:;
+}
+
+#btnPos3 {
+    margin:;
+}
