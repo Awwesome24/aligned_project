@@ -76,11 +76,6 @@ class Mainpage(webapp2.RedirectHandler):
         user_info['day']=day
         user_info['year']=year
         user_info['gender']=gender
-        print(name)
-        print(month)
-        print(day)
-        print(year)
-        print(gender)
         self.response.write(main_template.render(user_info))
 
 class Mainpage2(webapp2.RedirectHandler):
@@ -92,13 +87,21 @@ class Mainpage2(webapp2.RedirectHandler):
         sign = self.request.get('sign')
         user_info['sign']= sign
         user_info['url']= zodiac_backgrounds[sign]
-        self.response.write(main_template.render(user_info))    
+        self.response.write(main_template.render(user_info))   
 
 class results(webapp2.RedirectHandler):
     def get(self):
         result_template= the_jinja_env.get_template('templates/results.html')
-        self.response.write(result_template.render(user_info))
+        resource = "general_ascendant_report/tropical"
+        ritesh = sdk.VRClient(userID,apiKey)
+        zodiac_info = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
+        self.response.write(zodiac_info['ascendant'])
+        self.response.write(zodiac_info['report'])
 
+
+
+        self.response.write(result_template.render(user_info))
+'''
 
 class test(webapp2.RedirectHandler):
     def get(self):
@@ -109,7 +112,6 @@ class test(webapp2.RedirectHandler):
         ritesh = sdk.VRClient(userID,apiKey)
         
         #print("Ascendant: ")
-        # call horoscope apis
         zodiac_info = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
         # print(user_info['ascendant'])
         # print(user_info['report'])
@@ -120,22 +122,12 @@ class test(webapp2.RedirectHandler):
 
 #horoscope api for all zodiacs      
 
-class lsf_page(webapp2.RedirectHandler):
-    def get(self):
-        lsf_template= the_jinja_env.get_template('')
-        self.response.write(lsf_template.render())
-
-class api_page(webapp2.RedirectHandler):
-    def get(self):
-        api_template= the_jinja_env.get_template('')
-        self.response.write(api_template.render())
-# requires an API
-
+'''
 
 app = webapp2.WSGIApplication([
     ('/', Mainpage),
     ('/main2',Mainpage2),
-    ('/results',results),
-    ('/test',test)
+    ('/results',results)
+   # ('/test',test)
 ], debug=True)
 
