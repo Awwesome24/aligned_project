@@ -8,7 +8,7 @@
     </head>
     <style>
         #main_page{
-            background-image: url("img/")
+            background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/jPLiQ-9/looped-4kuhd-nebula-galaxy-star-space-background-for-different-events-and-projects_rm2jcfxb__F0012.png);
             
         }
         .title {
@@ -18,16 +18,20 @@
         .sign{
             color:#f49842;
         }
+        
+        .color{
+            color:white;
+        }
     </style>
     
     <body id= "main_page">
         
         <h1 class= "title"> Aligned </h1>
     
-        <h2>Welcome, {{name}}! Choose your corresponding zodiac!</h2>
+        <h2 class="color">Welcome, {{name}}! Choose your corresponding zodiac!</h2>
         
         <br> 
-       <form method=POST action='/results'>
+       <form method=POST action='/results' class="color">
            <input type="radio" name="sign" value="Aquarius" checked > Aquarius<br>(Jan20th-Feb18th)<br>
            <br>
            <input type="radio" name="sign" value="Pisces"> Pisces<br>(Feb19th-Mar20th)<br>
