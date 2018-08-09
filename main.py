@@ -17,6 +17,10 @@ the_jinja_env = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+zodiac_info={
+    'ascendant':"",
+    'report':""
+}
 
 user_info={
     'name':"",
@@ -28,6 +32,16 @@ user_info={
     'year':""
     }
     
+data = {
+    'date': 30,
+    'month': 10,
+    'year': 2012,
+    'hour': 0,
+    'minute': 0,
+    'latitude': 0,
+    'longitude': 0,
+    'timezone': 0
+    }    
 
 zodiac_backgrounds={
     'Aquarius':'https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BKpZoQ4viqlda90c/videoblocks-zodiac-sign-aquarius-and-horoscope-wheel-on-the-dark-blue-background_by6wer0hg_thumbnail-full01.png',
@@ -50,12 +64,23 @@ class Mainpage(webapp2.RedirectHandler):
     def get(self):
         main_template= the_jinja_env.get_template('templates/main_page.html')
         self.response.write(main_template.render())
-    
     def post(self):
         main_template= the_jinja_env.get_template('templates/main_page2.html')
         name = self.request.get('user_name')
-        print(name)
+        month = self.request.get('user_month')
+        day= self.request.get('user_day')
+        year= self.request.get('user_year')
+        gender=self.request.get('user_gender')
         user_info['name']=name
+        user_info['month']=month
+        user_info['day']=day
+        user_info['year']=year
+        user_info['gender']=gender
+        print(name)
+        print(month)
+        print(day)
+        print(year)
+        print(gender)
         self.response.write(main_template.render(user_info))
 
 class Mainpage2(webapp2.RedirectHandler):
@@ -77,25 +102,21 @@ class results(webapp2.RedirectHandler):
 
 class test(webapp2.RedirectHandler):
     def get(self):
-        data = {
-            'date': 10,
-            'month': 12,
-            'year': 1993,
-            'hour': 1,
-            'minute': 25,
-            'latitude': 25,
-            'longitude': 82,
-            'timezone': 5.5
-        }
-        resource = "astro_details"
+
+        resource = "general_ascendant_report/tropical"
     
         # instantiate VedicRishiClient class
         ritesh = sdk.VRClient(userID,apiKey)
-    
+        
+        #print("Ascendant: ")
         # call horoscope apis
-        responseData = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
-        print(responseData)
-
+        zodiac_info = ritesh.call(resource, data['date'], data['month'], data['year'], data['hour'], data['minute'], data['latitude'], data['longitude'], data['timezone']);
+        # print(user_info['ascendant'])
+        # print(user_info['report'])
+        self.response.write(zodiac_info['ascendant'])
+        self.response.write(zodiac_info['report'])
+        self.response.write(user_info['name'])
+        #self.response.write(responseData)
 
 #horoscope api for all zodiacs      
 

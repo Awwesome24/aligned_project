@@ -1,6 +1,7 @@
 from google.appengine.api import urlfetch
 import base64
 import urllib
+import ast
 
 class VRClient:
     baseURL = "http://api.vedicrishiastro.com/v1/"
@@ -13,7 +14,6 @@ class VRClient:
         return cls.baseURL
         
     def getResponse(self,resource,data):
-        
         #print(self.userID)
         url =  self.getUrl()+resource
         #resp = requests.post(url, data= data, auth=(self.userID, self.apiKey))
@@ -23,7 +23,12 @@ class VRClient:
                         method=urlfetch.POST,
                         payload=urllib.urlencode(data)
                                  )
-        print(result.content)
+        #print("+++++++SDK++++++++")
+        #print(result.content)
+        a = result.content
+        a = ast.literal_eval(a)
+        #print(a)
+        return(a)
     
     def packageHoroData(self, date, month, year, hour, minute, latitude, longitude, timezone):
         return {
@@ -72,7 +77,7 @@ class VRClient:
     
     def call(self, resource, date, month, year, hour, minute, latitude, longitude, timezone):
 	    data = self.packageHoroData(date, month, year, hour, minute, latitude, longitude, timezone)
-	    self.getResponse(resource,data)
+	    return self.getResponse(resource,data)
     
     def matchMakingCall(self, resource, maleBirthData, femaleBirthData):
         data = self.packageMatchMakingData(maleBirthData, femaleBirthData)
