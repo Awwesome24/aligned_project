@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <title>{{sign_key}}</title>
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
     </head>
     <style>
         .body {
@@ -13,16 +14,22 @@
             text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
             background-image:url({{background_url_key}});
             background-size:cover;
-            color:#ff6666;
+            color:#FFE4E1;
             text-align: center;
+            font-family: 'Oxygen', sans-serif;
         }
-    
+        
+        #Title{
+         font-size: 75px;   
+        }
     </style>
     <body class="body">
-        <h1 class="text-align">{{sign_key}}</h1>
-        <h2 class="text-align">Do you know what your sign means, {{name_key}}?</h2>
+        <h1 class="text-align" id="Title">{{sign_key}}</h1>
+        <h1 class="text-align">Do you know what your sign means, {{name_key}}?</h1>
         <br>
-        <h1>{{report_key}}</h1>
+        <h2>{{report_key}}</h2>
+        <h1>What is your best match?</h1>
+        <h2>{{match_key}}</h2>
     </body>
     
 </html>
